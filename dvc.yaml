@@ -1,0 +1,24 @@
+stages:
+  bronze:
+    cmd: python src/bronze.py
+    deps:
+      - data/incoming/batch.csv
+      - src/bronze.py
+    outs:
+      - data/bronze/cumulative_raw.csv
+
+  silver:
+    cmd: python src/silver.py
+    deps:
+      - data/bronze/cumulative_raw.csv
+      - src/silver.py
+    outs:
+      - data/silver/cleaned_data.csv
+
+  gold:
+    cmd: python src/gold.py
+    deps:
+      - data/silver/cleaned_data.csv
+      - src/gold.py
+    outs:
+      - data/gold/ml_ready.csv

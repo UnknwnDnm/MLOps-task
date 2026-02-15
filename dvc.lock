@@ -1,0 +1,50 @@
+schema: '2.0'
+stages:
+  bronze:
+    cmd: python src/bronze.py
+    deps:
+    - path: data/incoming/batch.csv
+      hash: md5
+      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
+      size: 18356
+    - path: src/bronze.py
+      hash: md5
+      md5: 6e3f1816941bc457b50fc78407801697
+      size: 668
+    outs:
+    - path: data/bronze/cumulative_raw.csv
+      hash: md5
+      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
+      size: 18356
+  silver:
+    cmd: python src/silver.py
+    deps:
+    - path: data/bronze/cumulative_raw.csv
+      hash: md5
+      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
+      size: 18356
+    - path: src/silver.py
+      hash: md5
+      md5: fdbe8c40bbdfc9d22550238931b77ee6
+      size: 650
+    outs:
+    - path: data/silver/cleaned_data.csv
+      hash: md5
+      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
+      size: 18356
+  gold:
+    cmd: python src/gold.py
+    deps:
+    - path: data/silver/cleaned_data.csv
+      hash: md5
+      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
+      size: 18356
+    - path: src/gold.py
+      hash: md5
+      md5: bdb6380ae8f1064998d814537edbc1ba
+      size: 892
+    outs:
+    - path: data/gold/ml_ready.csv
+      hash: md5
+      md5: bc70ee56fc18aca1b5413ded1d58c91d
+      size: 14307

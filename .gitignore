@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+
+# Python Cache
+__pycache__/
+*.pyc
+.dvc/cache/
+
+# Raw data and simulated batches
+train.csv
+mock_source_batches/
+data/
+*.csv
