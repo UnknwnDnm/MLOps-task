@@ -24,7 +24,7 @@ def process_batches():
             os.remove(source)
 
             # Trigger DVC
-            subprocess.run("dvc repro", shell=True)
+            subprocess.run("dvc repro -f", shell=True)
 
         else:
             # if no more files, sleep and check again later.
@@ -34,4 +34,4 @@ if __name__ == '__main__':
     try:
         process_batches()
     except KeyboardInterrupt:
-        print("\nStopping automation...")
+        print("\nStopping automation.")

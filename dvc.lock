@@ -5,8 +5,8 @@ stages:
     deps:
     - path: data/incoming
       hash: md5
-      md5: 3b612bd8f54635f9b6d50839d30ac233.dir
-      size: 18320
+      md5: bdd8c521eb7a5d6bf41415fd96f88048.dir
+      size: 18356
       nfiles: 1
     - path: src/bronze.py
       hash: md5
@@ -15,15 +15,15 @@ stages:
     outs:
     - path: data/bronze/cumulative_raw.csv
       hash: md5
-      md5: 953f5a7082ac09e2700074b556e8391b
-      size: 18320
+      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
+      size: 18356
   silver:
     cmd: python src/silver.py
     deps:
     - path: data/bronze/cumulative_raw.csv
       hash: md5
-      md5: 953f5a7082ac09e2700074b556e8391b
-      size: 18320
+      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
+      size: 18356
     - path: src/silver.py
       hash: md5
       md5: 13c2edb22b721c84c6136e3bfe65a744
@@ -31,15 +31,15 @@ stages:
     outs:
     - path: data/silver/cleaned_data.csv
       hash: md5
-      md5: fabe4b6d869c8611255ecc118420c079
-      size: 18425
+      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
+      size: 18356
   gold:
     cmd: python src/gold.py
     deps:
     - path: data/silver/cleaned_data.csv
       hash: md5
-      md5: fabe4b6d869c8611255ecc118420c079
-      size: 18425
+      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
+      size: 18356
     - path: src/gold.py
       hash: md5
       md5: bdb6380ae8f1064998d814537edbc1ba
@@ -47,15 +47,15 @@ stages:
     outs:
     - path: data/gold/ml_ready.csv
       hash: md5
-      md5: c57b21dc3cc017df85e74e55b0e095f8
-      size: 14394
+      md5: bc70ee56fc18aca1b5413ded1d58c91d
+      size: 14307
   test_data:
     cmd: python src/test_data.py
     deps:
     - path: data/silver/cleaned_data.csv
       hash: md5
-      md5: fabe4b6d869c8611255ecc118420c079
-      size: 18425
+      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
+      size: 18356
     - path: src/test_data.py
       hash: md5
       md5: f25961de2388c5c51361b5d1a8419271

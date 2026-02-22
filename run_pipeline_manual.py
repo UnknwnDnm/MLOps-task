@@ -24,7 +24,7 @@ def run():
     print(f"Ingesting {next_batch}")
 
     # Trigger the whole DataOps pipeline via DVC
-    subprocess.run("dvc repro", shell=True)
+    subprocess.run("dvc repro -f", shell=True)
 
 if __name__ == '__main__':
     run()
