@@ -2,13 +2,28 @@ import pandas as pd
 import os
 import shutil
 
-
 SOURCE_FILE = 'train.csv'  #  train file
 OUTPUT_DIR = 'mock_source_batches'  # save batches
 NUM_BATCHES = 5
+DATA_DIR = 'data' # pipeline data to clean
 
+def clean_environment():
+    # Wipes out old CSV files from the data folders before new split
+    print("Cleaning old pipeline data.")
+    if os.path.exists(DATA_DIR):
+        for root, dirs, files in os.walk(DATA_DIR):
+            for file in files:
+                if file.endswith('.csv'):
+                    file_path = os.path.join(root, file)
+                    try:
+                        os.remove(file_path)
+                    except Exception as e:
+                        print(f"Error deleting {file_path}: {e}")
 
 def split_dataset():
+
+    clean_environment()
+
     # Read the data
     if not os.path.exists(SOURCE_FILE):
         print(f"Error: {SOURCE_FILE} not found!")

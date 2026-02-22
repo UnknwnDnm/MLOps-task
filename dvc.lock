@@ -3,42 +3,43 @@ stages:
   bronze:
     cmd: python src/bronze.py
     deps:
-    - path: data/incoming/batch.csv
+    - path: data/incoming
       hash: md5
-      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
-      size: 18356
+      md5: 3b612bd8f54635f9b6d50839d30ac233.dir
+      size: 18320
+      nfiles: 1
     - path: src/bronze.py
       hash: md5
-      md5: 6e3f1816941bc457b50fc78407801697
-      size: 668
+      md5: 7fac517cecc149568c4d7b0f3ccaa8fb
+      size: 623
     outs:
     - path: data/bronze/cumulative_raw.csv
       hash: md5
-      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
-      size: 18356
+      md5: 953f5a7082ac09e2700074b556e8391b
+      size: 18320
   silver:
     cmd: python src/silver.py
     deps:
     - path: data/bronze/cumulative_raw.csv
       hash: md5
-      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
-      size: 18356
+      md5: 953f5a7082ac09e2700074b556e8391b
+      size: 18320
     - path: src/silver.py
       hash: md5
-      md5: fdbe8c40bbdfc9d22550238931b77ee6
-      size: 650
+      md5: 13c2edb22b721c84c6136e3bfe65a744
+      size: 957
     outs:
     - path: data/silver/cleaned_data.csv
       hash: md5
-      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
-      size: 18356
+      md5: fabe4b6d869c8611255ecc118420c079
+      size: 18425
   gold:
     cmd: python src/gold.py
     deps:
     - path: data/silver/cleaned_data.csv
       hash: md5
-      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
-      size: 18356
+      md5: fabe4b6d869c8611255ecc118420c079
+      size: 18425
     - path: src/gold.py
       hash: md5
       md5: bdb6380ae8f1064998d814537edbc1ba
@@ -46,5 +47,16 @@ stages:
     outs:
     - path: data/gold/ml_ready.csv
       hash: md5
-      md5: bc70ee56fc18aca1b5413ded1d58c91d
-      size: 14307
+      md5: c57b21dc3cc017df85e74e55b0e095f8
+      size: 14394
+  test_data:
+    cmd: python src/test_data.py
+    deps:
+    - path: data/silver/cleaned_data.csv
+      hash: md5
+      md5: fabe4b6d869c8611255ecc118420c079
+      size: 18425
+    - path: src/test_data.py
+      hash: md5
+      md5: f25961de2388c5c51361b5d1a8419271
+      size: 1311
