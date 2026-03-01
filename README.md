@@ -10,8 +10,10 @@
    2. Silver: Cleans the data, handles duplicates and adds the missing days.
    3. Test: Validates the data quality.
    4. Gold: Creates ML-ready dataset.
+   5. Train: Automatically trains an XGBoost model and logs the runs to mlflow.
 6. If validation fails, the pipeline stops.
 7. If it's successful, a new Gold dataset version is produced.
+8. To evaluate the final model on production data, run the "evaluate_test,py".
 
 ## Assumptions
 - Pipeline is executed in a local environment.
