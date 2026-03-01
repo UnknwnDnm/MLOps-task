@@ -28,3 +28,9 @@ stages:
       - src/gold.py
     outs:
       - data/gold/ml_ready.csv
+
+  train:
+      cmd: python src/train.py
+      deps:
+        - data/gold/ml_ready.csv
+        - src/train.py

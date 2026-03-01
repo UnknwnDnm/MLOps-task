@@ -13,7 +13,7 @@ def clean_environment():
     if os.path.exists(DATA_DIR):
         for root, dirs, files in os.walk(DATA_DIR):
             for file in files:
-                if file.endswith('.csv'):
+                if file.endswith('.csv') and file != 'test.csv':
                     file_path = os.path.join(root, file)
                     try:
                         os.remove(file_path)

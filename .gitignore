@@ -11,3 +11,7 @@ train.csv
 mock_source_batches/
 data/
 *.csv
+
+# MLflow tracking
+mlruns/
+mlflow.db

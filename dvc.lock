@@ -5,9 +5,9 @@ stages:
     deps:
     - path: data/incoming
       hash: md5
-      md5: bdd8c521eb7a5d6bf41415fd96f88048.dir
-      size: 18356
-      nfiles: 1
+      md5: c8d94e6e91b88f0f73888536c7f56ccc.dir
+      size: 78298
+      nfiles: 5
     - path: src/bronze.py
       hash: md5
       md5: 7fac517cecc149568c4d7b0f3ccaa8fb
@@ -15,15 +15,15 @@ stages:
     outs:
     - path: data/bronze/cumulative_raw.csv
       hash: md5
-      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
-      size: 18356
+      md5: 136cfd9f7b3fa2966cefcdb3d713f183
+      size: 78102
   silver:
     cmd: python src/silver.py
     deps:
     - path: data/bronze/cumulative_raw.csv
       hash: md5
-      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
-      size: 18356
+      md5: 136cfd9f7b3fa2966cefcdb3d713f183
+      size: 78102
     - path: src/silver.py
       hash: md5
       md5: 13c2edb22b721c84c6136e3bfe65a744
@@ -31,15 +31,15 @@ stages:
     outs:
     - path: data/silver/cleaned_data.csv
       hash: md5
-      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
-      size: 18356
+      md5: 136cfd9f7b3fa2966cefcdb3d713f183
+      size: 78102
   gold:
     cmd: python src/gold.py
     deps:
     - path: data/silver/cleaned_data.csv
       hash: md5
-      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
-      size: 18356
+      md5: 136cfd9f7b3fa2966cefcdb3d713f183
+      size: 78102
     - path: src/gold.py
       hash: md5
       md5: bdb6380ae8f1064998d814537edbc1ba
@@ -47,16 +47,27 @@ stages:
     outs:
     - path: data/gold/ml_ready.csv
       hash: md5
-      md5: bc70ee56fc18aca1b5413ded1d58c91d
-      size: 14307
+      md5: 18ee6c2293101a4ebd6407323d512aa3
+      size: 59685
   test_data:
     cmd: python src/test_data.py
     deps:
     - path: data/silver/cleaned_data.csv
       hash: md5
-      md5: a031586d3a1f0b8fcd1fa55c1dc14ab0
-      size: 18356
+      md5: 136cfd9f7b3fa2966cefcdb3d713f183
+      size: 78102
     - path: src/test_data.py
       hash: md5
       md5: f25961de2388c5c51361b5d1a8419271
       size: 1311
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/gold/ml_ready.csv
+      hash: md5
+      md5: 18ee6c2293101a4ebd6407323d512aa3
+      size: 59685
+    - path: src/train.py
+      hash: md5
+      md5: f102e4b1986b4bbf19a838da3292b466
+      size: 4142
